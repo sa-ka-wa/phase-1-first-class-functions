@@ -1,8 +1,12 @@
-require ( './helpers.js' );
+require("./helpers.js");
 
 const chai = require("chai");
 const spies = require("chai-spies");
 chai.use(spies);
+
+function receivesAFunction(callback) {
+  callback();
+}
 
 describe("index", () => {
   describe("receivesAFunction(callback)", () => {
@@ -14,6 +18,10 @@ describe("index", () => {
       expect(spy).to.have.been.called();
     });
   });
+
+  function returnsANamedFunction() {
+    return function named() {};
+  }
 
   describe("returnsANamedFunction()", () => {
     var fn;
@@ -30,6 +38,10 @@ describe("index", () => {
       expect(fn.name).not.to.eql("");
     });
   });
+
+  function returnsAnAnonymousFunction() {
+    return function () {};
+  }
 
   describe("returnsAnAnonymousFunction()", () => {
     var fn;
